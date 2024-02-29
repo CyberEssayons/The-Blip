@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://bumdj7e27hagu"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_6fgvf"]
+[ext_resource type="PackedScene" uid="uid://d4frqd6ime8es" path="res://house_but_cooler.tscn" id="1_10dlk"]
+[ext_resource type="Shader" path="res://BaseShader.gdshader" id="2_0v3ta"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="3_pri1q"]
+[ext_resource type="Resource" path="res://TerrainData/data.hterrain" id="4_0p5v2"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="5_i30ql"]
+[ext_resource type="PackedScene" uid="uid://ba1vanh70gh6t" path="res://player.tscn" id="6_jjh4v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3onxn"]
+sky_top_color = Color(0.113725, 0.141176, 0.184314, 1)
+sky_horizon_color = Color(0.329412, 0.337255, 0.34902, 1)
+sky_curve = 0.047796
+ground_curve = 0.0292818
+sun_angle_max = 7.78
+sun_curve = 0.974702
+
+[sub_resource type="Sky" id="Sky_fr7xe"]
+sky_material = SubResource("ProceduralSkyMaterial_3onxn")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_h576c"]
+background_mode = 2
+sky = SubResource("Sky_fr7xe")
+ambient_light_source = 3
+reflected_light_source = 2
+volumetric_fog_enabled = true
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_anisotropy = -0.9
+volumetric_fog_detail_spread = 2.07053
+volumetric_fog_sky_affect = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mog6w"]
+shader = ExtResource("2_0v3ta")
+shader_parameter/saturation = 0.75
+shader_parameter/contrast = 0.9
+shader_parameter/brightness = 0.8
+
+[sub_resource type="Resource" id="Resource_pmyj8"]
+script = ExtResource("5_i30ql")
+mode = 0
+textures = [[], []]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_6fgvf")
+
+[node name="House_but_cooler" parent="." instance=ExtResource("1_10dlk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.971723, 3.14204, 4.23726)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h576c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.850903, 0.525323, 0, -0.525323, 0.850903, 0, 41.3486, 4.11904)
+light_energy = 0.095
+light_indirect_energy = 0.279
+light_volumetric_fog_energy = 1.19
+light_angular_distance = 32.73
+sky_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_mog6w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("3_pri1q")
+centered = true
+_terrain_data = ExtResource("4_0p5v2")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_pmyj8")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+
+[node name="Player" parent="." instance=ExtResource("6_jjh4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 25)
