@@ -67,4 +67,14 @@ Day one log:
 	- Made animations for some of the appliances
 	- Made a lot of Prof. Oak jokes to myself
 	- Cringed at own jokes
+Day Two log (late):
+	- Got a lot of meshes converted to glb from fbx at once 
+	- Used the TV mesh
+	- "learned" how to use SubViewports to play 2D video in 3D (a.k.a mortal struggle mixed with sudden unexpected success...somehow)
+	- Got git lfs installed because the video file was too big
+	- Started in on actual game logic (Thought I was going to lay out the area first but realized I HAVE to have a game at the end, so prototype it is)
+
+
+Day Three (not late):
+	-
 
