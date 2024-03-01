@@ -1,11 +1,15 @@
 extends Node3D
 
-enum GameStates {Start, BuildUp1, Buildup2, Bilp1, BuildUp3, Bilp2}
+@export var ObjectiveBuffer: float = 5.0
+
+enum GameStates {Start, BuildUp1, Bilp1, BuildUp2, Bilp2}
 
 var State: GameStates = GameStates.Start
 var paused: bool = false
 var playerCanLock: bool = false
+var playerCanTurnOffTV: bool = false
 @onready var Objective: Label = $ObjectiveContainer/Objective
+@onready var PlayerHint: Label = $PlayerHintContainer/PlayerHintLabel
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -30,6 +34,8 @@ func _input(event):
 		if(State == GameStates.Start and playerCanLock):
 			#"Lock" the front door
 			pass
+		elif(State == GameStates.Bilp2 and playerCanLock):
+			pass
 
 
 func on_player_canReach_FrontDoor(body):
@@ -37,12 +43,19 @@ func on_player_canReach_FrontDoor(body):
 		#continue logic
 		if(body is Player):
 			playerCanLock = true
+			PlayerHint.text = "Press 'E' or LMB to lock door"
+
+	if(State == GameStates.Bilp2):
+		if(body is Player):
+			playerCanLock = true
+			PlayerHint.text = "Press 'E' or LMB to unlock and open door"
 	pass # Replace with function body.
 
 
 func on_player_cantReach_FrontDoor(body):
 	if(body is Player):
 		playerCanLock = false
+		PlayerHint.text = ""
 	pass # Replace with function body.
 
 
@@ -50,3 +63,24 @@ func _on_door_lock_sound_finished():
 	State = GameStates.BuildUp1
 	#crap now I need to make the TV and start all that stuff
 	pass # Replace with function body.
+
+func On_mb_entrace_enetered(body: Node3D)->void:
+	if(State == GameStates.BuildUp1):
+		#Stop the music. Wait X seconds. Then change the objective
+		State = GameStates.Bilp1
+		pass
+	pass
+
+
+func on_can_reach_TV_entered(body: Node3D)->void:
+	if(State == GameStates.BuildUp1):
+		if(body is Player):
+			playerCanTurnOffTV = true
+			PlayerHint.text = "Press 'E' or LMB to turn off TV"
+	pass # Replace with function body.
+
+func on_can_reach_tv_exited(body: Node3D)->void:
+	if(body is Player):
+		playerCanTurnOffTV = false
+		PlayerHint.text = ""
+	pass
