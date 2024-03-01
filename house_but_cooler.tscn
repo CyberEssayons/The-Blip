@@ -1,8 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://d4frqd6ime8es"]
+[gd_scene load_steps=39 format=3 uid="uid://d4frqd6ime8es"]
 
-[ext_resource type="ArrayMesh" uid="uid://c0adj52e56pl4" path="res://Meshes/House/SmallHouse_Cube_001.res" id="1_ak58r"]
+[ext_resource type="ArrayMesh" uid="uid://c0adj52e56pl4" path="res://Meshes/House/SmallHouse_Cube_001.res" id="1_k35s6"]
 [ext_resource type="ArrayMesh" uid="uid://dc8ra8k5weqpb" path="res://Meshes/House/SmallHouse_Cube_002.res" id="2_qejv4"]
-[ext_resource type="ArrayMesh" uid="uid://b5og4tcxosba7" path="res://Meshes/House/SmallHouse_Cube_003.res" id="3_0xeau"]
 [ext_resource type="ArrayMesh" uid="uid://dgmf3ssmfjsmu" path="res://Meshes/House/SmallHouse_Cube_004.res" id="4_jv1tj"]
 [ext_resource type="ArrayMesh" uid="uid://dubifvl2j2kku" path="res://Meshes/House/SmallHouse_Cube_006.res" id="5_4o1v3"]
 [ext_resource type="ArrayMesh" uid="uid://c2yx7dxltyno4" path="res://Meshes/House/SmallHouse_Cube_007.res" id="6_sceyj"]
@@ -72,7 +71,7 @@ data = PackedVector3Array(984.11, 594.269, -277.456, 984.11, 561.588, -445.529, 
 
 [node name="walls" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
-mesh = ExtResource("1_ak58r")
+mesh = ExtResource("1_k35s6")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="walls"]
@@ -87,7 +86,6 @@ skeleton = NodePath("")
 
 [node name="roof" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
-mesh = ExtResource("3_0xeau")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="roof"]

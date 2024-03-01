@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 up={
