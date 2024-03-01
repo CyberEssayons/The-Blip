@@ -1,0 +1,70 @@
+Theme: aberation..abberation?...aberration?...abberration? abnegation? apple?
+
+looked it up: aberation
+
+thoughts: 
+has to be small scope
+ - each item the player picks up works differently than expected
+ - Horror, but the enemy is literally a temporal aberation
+ - gun that Alives people
+ - horror where it's the player's parent blipping (bliping?) in and out of existence...
+ 
+Kinda like the last one. Might be too big. We'll see. 
+
+What's needed: 
+	- build room(s)
+		-cheat building and just download a mesh?
+			-technically not cheating
+			-also really have to make a GitHub...
+	- create parent (mom? dad?, Dad-mom? MOM-DAD? BatDad? BatMom?)
+	- gather sounds: 
+		-bliping noise
+		-static for tv
+		-electrostatic? is that even a real word?
+		-light switch
+		-disembodied voice
+		-footsteps? Maybe
+		-voice acting? Probably at this point, but just for parent
+		-music?
+			-probably somber for lead in
+			-then high energy for when blips start
+	- determine scare trajectory
+		- initial non scare build up
+			- Send player to front door to lock it
+			- turn on lights in another room
+			- turn on TV
+			- play tense music on the way
+			- turn off TV
+			- be normal
+		- secondary non scare build up
+			-Send player to bed room from TV
+			-Hear disembodied voice from down the hall
+			- play tense music again, increase volume as player gets closer
+			- cut the music right before the player reaches location
+			- nothing.jpg
+		- first blip (kinda a jump scare)
+			- No build up for this, just send player to bedroom
+			- blip when they pass the door way
+		- build up
+			- electro-static playing globally
+			- tense music starts to ramp again
+			- direct player to basement or bathroom
+			- Suddenly stop
+		- Final blip
+			- Direct player to go outside
+			- player reaches front door
+			- blip 
+			- "Son!" distorted shout
+			- end game with player character saying "Dad?..."
+			
+Day one log: 
+	- Found mesh assets to cheese the level making process
+	- created terrain
+	- cried only a little
+	- created a player
+	- implemented simple world controls
+	- half built the house
+	- Made animations for some of the appliances
+	- Made a lot of Prof. Oak jokes to myself
+	- Cringed at own jokes
+
