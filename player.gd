@@ -7,11 +7,15 @@ extends CharacterBody3D
 const JUMP_VELOCITY = 4.5
 
 @onready var Pivot: Node3D = $CollisionShape3D/Pivot
+@onready var Cast: RayCast3D = $CollisionShape3D/Pivot/Camera3D/RayCast3D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _physics_process(delta):
+	if (Engine.get_physics_frames() % 5 == 0 and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED):
+		if(Cast.is_colliding()):
+			print(Cast.get_collider())
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta

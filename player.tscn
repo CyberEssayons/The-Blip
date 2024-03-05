@@ -15,3 +15,10 @@ shape = SubResource("CapsuleShape3D_d67ky")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686073, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CollisionShape3D/Pivot"]
+
+[node name="RayCast3D" type="RayCast3D" parent="CollisionShape3D/Pivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, -0.854928)
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 8
+hit_from_inside = true
+collide_with_areas = true

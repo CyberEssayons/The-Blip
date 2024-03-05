@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bumdj7e27hagu"]
+[gd_scene load_steps=28 format=3 uid="uid://bumdj7e27hagu"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_6fgvf"]
 [ext_resource type="PackedScene" uid="uid://d4frqd6ime8es" path="res://house_but_cooler.tscn" id="1_10dlk"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://b2omt1wvb0e4o" path="res://Sounds/white-noise-8117.mp3" id="10_px2lg"]
 [ext_resource type="PackedScene" path="res://Fridge.tscn" id="11_m3xt7"]
 [ext_resource type="PackedScene" path="res://Stove.tscn" id="12_4dp2x"]
+[ext_resource type="PackedScene" uid="uid://bgso0scuniipd" path="res://Door.tscn" id="15_c0a02"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3onxn"]
 sky_top_color = Color(0.113725, 0.141176, 0.184314, 1)
@@ -29,6 +30,7 @@ radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_h576c"]
 background_mode = 2
+background_energy_multiplier = 0.7
 sky = SubResource("Sky_fr7xe")
 ambient_light_source = 3
 reflected_light_source = 2
@@ -85,7 +87,7 @@ environment = SubResource("Environment_h576c")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.850903, 0.525323, 0, -0.525323, 0.850903, 0, 41.3486, 4.11904)
-light_energy = 0.095
+light_energy = 0.01
 light_indirect_energy = 0.279
 light_volumetric_fog_energy = 1.19
 light_angular_distance = 32.73
@@ -241,6 +243,13 @@ transform = Transform3D(1.42131, 0, 0, 0, 1.42131, 0, 0, 0, 1.42131, -5.91271, 4
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="FrontDoor" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858885, 4.50035, 4.33834)
+DoorName = &"Front"
+
+[node name="Door" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(0.751483, 0, 0, 0, 1, 0, 0, 0, 1, 6.90784, 4.58993, -2.33034)
 
 [connection signal="body_entered" from="FrontDoorArea" to="." method="on_player_canReach_FrontDoor"]
 [connection signal="body_exited" from="FrontDoorArea" to="." method="on_player_cantReach_FrontDoor"]
