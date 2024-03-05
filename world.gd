@@ -10,6 +10,10 @@ var playerCanLock: bool = false
 var playerCanTurnOffTV: bool = false
 @onready var Objective: Label = $ObjectiveContainer/Objective
 @onready var PlayerHint: Label = $PlayerHintContainer/PlayerHintLabel
+
+#Sounds
+@onready var LockDoorSound: AudioStreamPlayer3D = $DoorLockSound 
+@onready var TVStaticSound: AudioStreamPlayer3D = $TVStatic
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -33,6 +37,7 @@ func _input(event):
 	if(event.is_action_pressed("interact")):
 		if(State == GameStates.Start and playerCanLock):
 			#"Lock" the front door
+			LockDoorSound.play()
 			pass
 		elif(State == GameStates.Bilp2 and playerCanLock):
 			pass
@@ -62,6 +67,8 @@ func on_player_cantReach_FrontDoor(body):
 func _on_door_lock_sound_finished():
 	State = GameStates.BuildUp1
 	#crap now I need to make the TV and start all that stuff
+	TVStaticSound.loop = true
+	
 	pass # Replace with function body.
 
 func On_mb_entrace_enetered(body: Node3D)->void:

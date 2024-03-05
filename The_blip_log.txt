@@ -48,8 +48,8 @@ What's needed:
 		- build up
 			- electro-static playing globally
 			- tense music starts to ramp again
-			- direct player to basement or bathroom
-			- Suddenly stop
+			- direct player to basement or bathroom - It's bathroom...we don't have a basement
+			- Suddenly stop - use a timer with some arbitrary or random time
 		- Final blip
 			- Direct player to go outside
 			- player reaches front door
@@ -76,5 +76,9 @@ Day Two log (late):
 
 
 Day Three (not late):
-	-
+	- Added stove and fridge
+	- Added some basic game logic
+	- Added playerhit so players will know what to do
+	- Allowed for multi use of front door stuff
+	- Need to figure out how to work doors once at that point...
 

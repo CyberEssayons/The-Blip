@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bumdj7e27hagu"]
+[gd_scene load_steps=25 format=3 uid="uid://bumdj7e27hagu"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_6fgvf"]
 [ext_resource type="PackedScene" uid="uid://d4frqd6ime8es" path="res://house_but_cooler.tscn" id="1_10dlk"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://0fgkxb38w1r0" path="res://TV B.glb" id="8_b7umh"]
 [ext_resource type="VideoStream" path="res://video/FREE_real_VHS_static.ogv" id="9_nsyft"]
 [ext_resource type="AudioStream" uid="uid://b2omt1wvb0e4o" path="res://Sounds/white-noise-8117.mp3" id="10_px2lg"]
+[ext_resource type="PackedScene" uid="uid://cbyx6nw4jpqn2" path="res://Fridge.tscn" id="11_m3xt7"]
+[ext_resource type="PackedScene" uid="uid://obdbgyjifpnx" path="res://Stove.tscn" id="12_4dp2x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3onxn"]
 sky_top_color = Color(0.113725, 0.141176, 0.184314, 1)
@@ -72,7 +74,6 @@ size = Vector3(1551.83, 200, 451.379)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_6fgvf")
-ObjectiveBuffer = null
 
 [node name="House_but_cooler" parent="." instance=ExtResource("1_10dlk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.971723, 3.14204, 4.23726)
@@ -223,6 +224,12 @@ grow_horizontal = 2
 
 [node name="PlayerHintLabel" type="Label" parent="PlayerHintContainer"]
 layout_mode = 2
+
+[node name="Fridge" parent="." instance=ExtResource("11_m3xt7")]
+transform = Transform3D(1.45156, 0, 0, 0, 1.45156, 0, 0, 0, 1.45156, -2.49946, 5.51849, -13.8988)
+
+[node name="Stove" parent="." instance=ExtResource("12_4dp2x")]
+transform = Transform3D(1.42131, 0, 0, 0, 1.42131, 0, 0, 0, 1.42131, -5.91271, 4.94765, -13.9654)
 
 [connection signal="body_entered" from="FrontDoorArea" to="." method="on_player_canReach_FrontDoor"]
 [connection signal="body_exited" from="FrontDoorArea" to="." method="on_player_cantReach_FrontDoor"]
