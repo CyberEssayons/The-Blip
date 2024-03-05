@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7asorafbqb0w"]
+
+[ext_resource type="ArrayMesh" uid="uid://brxe1tscsay0b" path="res://Meshes/House/WindowSill_Cube_001.res" id="1_ks876"]
+[ext_resource type="ArrayMesh" uid="uid://dpwb6ahj02q6m" path="res://Meshes/House/WindowSill_Cube_002.res" id="2_ubjjx"]
+[ext_resource type="ArrayMesh" uid="uid://frxdhwh57hvk" path="res://Meshes/House/WindowSill_Cube_003.res" id="3_dgxly"]
+[ext_resource type="ArrayMesh" uid="uid://qtjnqfvu2mr4" path="res://Meshes/House/WindowSill_Cube_005.res" id="4_mul1v"]
+[ext_resource type="ArrayMesh" uid="uid://djfbhegp8xpau" path="res://Meshes/House/WindowSill_Cube_004.res" id="5_vb2x8"]
+[ext_resource type="ArrayMesh" uid="uid://byb06frbmmsv0" path="res://Meshes/House/WindowSill_Plane.res" id="6_e5d28"]
+
+[node name="WindowSill" type="Node3D"]
+
+[node name="frame" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0119026, 0, 0, 0, 0, -0.0119026, 0, 0.00120798, 0, 0, 0, 0)
+mesh = ExtResource("1_ks876")
+skeleton = NodePath("")
+
+[node name="top inner frame" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0174266, 0, 0, 0, 0, -0.0120301, 0, 0.000185953, 0, -0.000247434, 0.295726, 0.041687)
+mesh = ExtResource("2_ubjjx")
+skeleton = NodePath("")
+
+[node name="top glass" type="MeshInstance3D" parent="top inner frame"]
+transform = Transform3D(1, 0, 0, 0, 0.801315, 0, 0, 0, 1, 0, -0.000742305, -14.007)
+mesh = ExtResource("3_dgxly")
+skeleton = NodePath("")
+
+[node name="bottom inner frame" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0172704, 0, 0, 0, 0, -0.0118197, 0, 0.000184658, 0, -0.00024744, -0.313967, -0.00988039)
+mesh = ExtResource("4_mul1v")
+skeleton = NodePath("")
+
+[node name="bottom glass" type="MeshInstance3D" parent="bottom inner frame"]
+transform = Transform3D(1, 0, 0, 0, 0.801315, 0, 0, 0, 1, 0, -0.000209439, 14.4084)
+mesh = ExtResource("5_vb2x8")
+skeleton = NodePath("")
+
+[node name="Plane" type="MeshInstance3D" parent="bottom inner frame"]
+transform = Transform3D(-3.22629e-06, 0.03569, 0, -1.59201, -7.2328e-08, 0, 0, 0, 0.0271488, 0.136186, 70.5068, -27.4885)
+mesh = ExtResource("6_e5d28")
+skeleton = NodePath("")
