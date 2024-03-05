@@ -2,7 +2,7 @@ extends Node3D
 
 @export var ObjectiveBuffer: float = 5.0
 
-enum GameStates {Start, BuildUp1, Bilp1, BuildUp2, Bilp2}
+enum GameStates {Start, BuildUp1, BuildUp2, Bilp1, BuildUp3, Bilp2}
 
 var State: GameStates = GameStates.Start
 var paused: bool = false
@@ -10,10 +10,14 @@ var playerCanLock: bool = false
 var playerCanTurnOffTV: bool = false
 @onready var Objective: Label = $ObjectiveContainer/Objective
 @onready var PlayerHint: Label = $PlayerHintContainer/PlayerHintLabel
+@onready var slightPause: Timer = $Timer
+
+@onready var TVStaticVideo: VideoStreamPlayer = $SubViewport/VideoStreamPlayer
 
 #Sounds
 @onready var LockDoorSound: AudioStreamPlayer3D = $DoorLockSound 
 @onready var TVStaticSound: AudioStreamPlayer3D = $TVStatic
+@onready var VoiceSound: AudioStreamPlayer3D = $DisembodiedVoice
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -38,9 +42,17 @@ func _input(event):
 		if(State == GameStates.Start and playerCanLock):
 			#"Lock" the front door
 			LockDoorSound.play()
-			pass
+			
 		elif(State == GameStates.Bilp2 and playerCanLock):
 			pass
+			
+		if(State == GameStates.BuildUp1 and playerCanTurnOffTV):
+			TVStaticSound.stop()
+			TVStaticVideo.stop()
+			slightPause.start(1.0)
+			State = GameStates.BuildUp2
+			Objective.text = "Objective: go to bed"
+			
 
 
 func on_player_canReach_FrontDoor(body):
@@ -66,10 +78,14 @@ func on_player_cantReach_FrontDoor(body):
 
 func _on_door_lock_sound_finished():
 	State = GameStates.BuildUp1
-	#crap now I need to make the TV and start all that stuff
-	TVStaticSound.loop = true
+	slightPause.start(1)
+	Objective.text = "Objective: Go to bed"
 	
 	pass # Replace with function body.
+
+func on_tv_static_finished():
+	if(State == GameStates.BuildUp1):
+		TVStaticSound.play()
 
 func On_mb_entrace_enetered(body: Node3D)->void:
 	if(State == GameStates.BuildUp1):
@@ -91,3 +107,13 @@ func on_can_reach_tv_exited(body: Node3D)->void:
 		playerCanTurnOffTV = false
 		PlayerHint.text = ""
 	pass
+
+func on_Timer_finished():
+	if(State == GameStates.BuildUp1):
+		Objective.text = "Objective: turn off that TV!"
+		TVStaticSound.play()
+		TVStaticVideo.loop = true
+		TVStaticVideo.play()
+	elif(State == GameStates.BuildUp2):
+		Objective.text = "Objective: investigate that voice"
+		VoiceSound.play()
