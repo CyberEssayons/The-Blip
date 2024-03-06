@@ -12,8 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://cl040ssbnwoat" path="res://Sounds/ominous-tension-157906.mp3" id="9_am41a"]
 [ext_resource type="VideoStream" path="res://video/FREE_real_VHS_static.ogv" id="9_nsyft"]
 [ext_resource type="AudioStream" uid="uid://b2omt1wvb0e4o" path="res://Sounds/white-noise-8117.mp3" id="10_px2lg"]
-[ext_resource type="PackedScene" path="res://Fridge.tscn" id="11_m3xt7"]
-[ext_resource type="PackedScene" path="res://Stove.tscn" id="12_4dp2x"]
+[ext_resource type="PackedScene" uid="uid://cbyx6nw4jpqn2" path="res://Fridge.tscn" id="11_m3xt7"]
+[ext_resource type="PackedScene" uid="uid://obdbgyjifpnx" path="res://Stove.tscn" id="12_4dp2x"]
 [ext_resource type="PackedScene" uid="uid://bgso0scuniipd" path="res://Door.tscn" id="15_c0a02"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3onxn"]
@@ -247,9 +247,32 @@ wait_time = 0.5
 [node name="FrontDoor" parent="." instance=ExtResource("15_c0a02")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858885, 4.50035, 4.33834)
 DoorName = &"Front"
+allowOpen = false
 
-[node name="Door" parent="." instance=ExtResource("15_c0a02")]
-transform = Transform3D(0.751483, 0, 0, 0, 1, 0, 0, 0, 1, 6.90784, 4.58993, -2.33034)
+[node name="PlayerBedroomBathroomDoor" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(0.751483, 0, 0, 0, 1, 0, 0, 0, 1, 6.90784, 4.50142, -2.33034)
+DoorName = &"PlayerBedroomBathroomDoor"
+
+[node name="PlayerBedroomDoor" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(1.49012e-08, 0, 1, 0, 1, 0, -0.751483, 0, 2.98023e-08, 2.2478, 4.50142, 2.50962)
+DoorName = &"PlayerBedroomDoor"
+
+[node name="MasterBedroomBathroomDoor" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(0.751483, 0, 0, 0, 1, 0, 0, 0, 1, 6.90784, 4.50142, -6.09228)
+DoorName = &"MasterBedroomBathroomDoor"
+
+[node name="MasterBedroomKitchenDoor" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(-3.28484e-08, 0, -1, 0, 1, 0, 0.751483, 0, -4.37114e-08, 2.29351, 4.50142, -13.1243)
+DoorName = &"MasterBedroomKitchenDoor"
+
+[node name="BackDoor" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(0.883232, 0, 0, 0, 1, 0, 0, 0, 1, 0.841998, 4.50142, -14.624)
+DoorName = &"BackDoor"
+allowOpen = false
+
+[node name="BathroomDoor" parent="." instance=ExtResource("15_c0a02")]
+transform = Transform3D(-3.28484e-08, 0, -1, 0, 1, 0, 0.751483, 0, -4.37114e-08, 0.539031, 4.4988, -4.8627)
+DoorName = &"BathroomDoor"
 
 [connection signal="body_entered" from="FrontDoorArea" to="." method="on_player_canReach_FrontDoor"]
 [connection signal="body_exited" from="FrontDoorArea" to="." method="on_player_cantReach_FrontDoor"]

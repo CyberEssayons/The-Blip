@@ -8,6 +8,9 @@ const JUMP_VELOCITY = 4.5
 
 @onready var Pivot: Node3D = $CollisionShape3D/Pivot
 @onready var Cast: RayCast3D = $CollisionShape3D/Pivot/Camera3D/RayCast3D
+
+var currentDoor: Door
+var canReachDoor: bool = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -15,7 +18,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	if (Engine.get_physics_frames() % 5 == 0 and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED):
 		if(Cast.is_colliding()):
-			print(Cast.get_collider())
+			var tmp = Cast.get_collider().get_parent()
+			if(tmp is Door):
+				currentDoor = tmp
+				canReachDoor = true
+		else:
+			canReachDoor = false
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -42,3 +50,11 @@ func _input(event):
 		rotate_y(deg_to_rad(-event.relative.x * sensitivity))
 		Pivot.rotate_x(deg_to_rad(-event.relative.y * sensitivity))
 		Pivot.rotation.x = clampf(Pivot.rotation.x, deg_to_rad(-70), deg_to_rad(70))
+		
+	if(event.is_action_pressed("interact")):
+		if(canReachDoor):
+			print(currentDoor.toggle)
+			if(currentDoor.toggle):
+				currentDoor.closeDoorIn(currentDoor.DoorName)
+			else:
+				currentDoor.openDoorIn(currentDoor.DoorName)

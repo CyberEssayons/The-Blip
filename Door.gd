@@ -2,6 +2,7 @@ class_name Door
 extends Node3D
 
 @export var DoorName: StringName = ""
+@export var allowOpen: bool = true
 var toggle = false
 var canInteract = false
 var playerInArea = false
@@ -18,22 +19,22 @@ func _process(delta):
 	pass
 
 func openDoorIn(door_name: StringName):
-	if(door_name == DoorName and canInteract):
+	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Open_in")
 		
 func openDoorOut(door_name: StringName):
-	if(door_name == DoorName and canInteract):
+	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Open_out")
 		
 func closeDoorIn(door_name: StringName):
-	if(door_name == DoorName and canInteract):
+	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Close_in")
 		
 func closeDoorOut(door_name: StringName):
-	if(door_name == DoorName and canInteract):
+	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Close_out")
 

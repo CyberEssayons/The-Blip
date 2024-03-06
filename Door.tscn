@@ -486,7 +486,7 @@ mesh = SubResource("ArrayMesh_1ysfb")
 skeleton = NodePath("")
 
 [node name="door" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.00025842, 0.00999666, -4.36968e-10, 0, -4.37114e-10, -0.01, -0.00999666, -0.00025842, 1.12959e-11, -0.674756, 1.29893, -0.062816)
+transform = Transform3D(0.00999887, -0.00015049, 6.57813e-12, 0, -4.37114e-10, -0.01, 0.00015049, 0.00999887, -4.37064e-10, -0.674756, 1.29893, -0.062816)
 mesh = SubResource("ArrayMesh_py4dh")
 skeleton = NodePath("")
 
@@ -546,6 +546,7 @@ libraries = {
 }
 
 [node name="CanOpen" type="Area3D" parent="."]
+collision_layer = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CanOpen"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00805664, 1.4426, -0.0220337)
