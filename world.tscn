@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bumdj7e27hagu"]
+[gd_scene load_steps=33 format=3 uid="uid://bumdj7e27hagu"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_6fgvf"]
 [ext_resource type="PackedScene" uid="uid://d4frqd6ime8es" path="res://house_but_cooler.tscn" id="1_10dlk"]
@@ -15,6 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://cbyx6nw4jpqn2" path="res://Fridge.tscn" id="11_m3xt7"]
 [ext_resource type="PackedScene" uid="uid://obdbgyjifpnx" path="res://Stove.tscn" id="12_4dp2x"]
 [ext_resource type="PackedScene" uid="uid://bgso0scuniipd" path="res://Door.tscn" id="15_c0a02"]
+[ext_resource type="PackedScene" uid="uid://bggtllpmbhtqb" path="res://Meshes/glb_LowPoly_Furniture/Bathroom_glb/Toilet Roll Holder.glb" id="16_sw6kl"]
+[ext_resource type="PackedScene" uid="uid://cuewojqr16yrj" path="res://toilet.tscn" id="17_ibu6j"]
+[ext_resource type="PackedScene" uid="uid://dtmdmbdj3eet7" path="res://shower.tscn" id="18_cqtal"]
+[ext_resource type="PackedScene" uid="uid://crbi2igqv4xvi" path="res://sink.tscn" id="19_4unyg"]
+[ext_resource type="PackedScene" uid="uid://cs8jflk6pxjfc" path="res://blip_char.tscn" id="20_0vgc0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3onxn"]
 sky_top_color = Color(0.113725, 0.141176, 0.184314, 1)
@@ -204,7 +209,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.220764, 0, -0.0233459)
 shape = SubResource("BoxShape3D_r4i6e")
 
 [node name="Blip1Spawn1" type="Node3D" parent="BedroomEntrance1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02494, 0.920569, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02494, -0.57715, 0)
 
 [node name="BedroomEntrance2" type="Area3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.91542, 5.06498, -1.74527)
@@ -214,7 +219,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.220764, 0, -0.0233459)
 shape = SubResource("BoxShape3D_r4i6e")
 
 [node name="Blip1Spawn2" type="Node3D" parent="BedroomEntrance2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05955, 0.770576, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05955, -0.592558, 0)
 
 [node name="CanReachTV" type="Area3D" parent="."]
 transform = Transform3D(-0.000857349, 0, 0.00185369, 0, 0.00204235, 0, -0.00185369, 0, -0.000857349, -6.28227, 5.2429, 3.25578)
@@ -274,12 +279,31 @@ allowOpen = false
 transform = Transform3D(-3.28484e-08, 0, -1, 0, 1, 0, 0.751483, 0, -4.37114e-08, 0.539031, 4.4988, -4.8627)
 DoorName = &"BathroomDoor"
 
+[node name="Toilet Roll Holder" parent="." instance=ExtResource("16_sw6kl")]
+transform = Transform3D(0.0036059, 0, 0, 0, 0.0036059, 0, 0, 0, 0.0036059, 9.55726, 5.38758, -5.85168)
+
+[node name="Toilet" parent="." instance=ExtResource("17_ibu6j")]
+transform = Transform3D(-1.2537e-10, 0, -0.00286813, 0, 0.00286813, 0, 0.00286813, 0, -1.2537e-10, 9.95237, 5.33505, -5.20329)
+
+[node name="Shower" parent="." instance=ExtResource("18_cqtal")]
+transform = Transform3D(1.16415e-10, 0, -0.00318823, 0, 0.00318823, 0, 0.00318823, 0, 1.16415e-10, 9.78811, 5.67993, -3.14989)
+
+[node name="BlipChar" parent="." instance=ExtResource("20_0vgc0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.66035, 0.432654, 0.0450082)
+origin = Vector3(6.66, 0.433, 0.045)
+
+[node name="Sink" parent="." instance=ExtResource("19_4unyg")]
+transform = Transform3D(-0.8, 0, 6.99382e-08, 0, 0.8, 0, -6.99382e-08, 0, -0.8, 4.14188, 4.43499, -2.65873)
+
 [connection signal="body_entered" from="FrontDoorArea" to="." method="on_player_canReach_FrontDoor"]
 [connection signal="body_exited" from="FrontDoorArea" to="." method="on_player_cantReach_FrontDoor"]
 [connection signal="finished" from="DoorLockSound" to="." method="_on_door_lock_sound_finished"]
 [connection signal="finished" from="TVStatic" to="." method="on_tv_static_finished"]
+[connection signal="finished" from="DisembodiedVoice" to="." method="_on_disembodied_voice_finished"]
 [connection signal="body_entered" from="MBEntrance1" to="." method="On_mb_entrance_entered"]
 [connection signal="body_entered" from="MBEntrance2" to="." method="On_mb_entrance_entered"]
+[connection signal="body_entered" from="BedroomEntrance1" to="." method="_on_bedroom_entrance_1_body_entered"]
+[connection signal="body_entered" from="BedroomEntrance2" to="." method="_on_bedroom_entrance_2_body_entered"]
 [connection signal="body_entered" from="CanReachTV" to="." method="on_can_reach_TV_entered"]
 [connection signal="body_exited" from="CanReachTV" to="." method="on_can_reach_tv_exited"]
 [connection signal="timeout" from="Timer" to="." method="on_Timer_finished"]

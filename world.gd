@@ -11,6 +11,7 @@ var playerCanTurnOffTV: bool = false
 @onready var Objective: Label = $ObjectiveContainer/Objective
 @onready var PlayerHint: Label = $PlayerHintContainer/PlayerHintLabel
 @onready var slightPause: Timer = $Timer
+@onready var BlipChar = $BlipChar
 
 @onready var TVStaticVideo: VideoStreamPlayer = $SubViewport/VideoStreamPlayer
 
@@ -18,6 +19,7 @@ var playerCanTurnOffTV: bool = false
 @onready var LockDoorSound: AudioStreamPlayer3D = $DoorLockSound 
 @onready var TVStaticSound: AudioStreamPlayer3D = $TVStatic
 @onready var VoiceSound: AudioStreamPlayer3D = $DisembodiedVoice
+@onready var TenseMusic: AudioStreamPlayer = $TenseMusic
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -117,3 +119,22 @@ func on_Timer_finished():
 	elif(State == GameStates.BuildUp2):
 		Objective.text = "Objective: investigate that voice"
 		VoiceSound.play()
+
+
+func _on_disembodied_voice_finished():
+	TenseMusic.play()
+	pass # Replace with function body.
+
+
+func _on_bedroom_entrance_1_body_entered(body):
+	if(State == GameStates.Bilp1):
+		BlipChar.rotate_y(deg_to_rad(-90))
+		BlipChar.global_position = $BedroomEntrance1/Blip1Spawn1.global_position
+	pass # Replace with function body.
+
+
+func _on_bedroom_entrance_2_body_entered(body):
+	if(State == GameStates.Bilp1):
+		BlipChar.rotate_y(deg_to_rad(180))
+		BlipChar.global_position = $BedroomEntrance2/Blip1Spawn2.global_position
+	pass # Replace with function body.
