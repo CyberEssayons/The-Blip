@@ -94,5 +94,9 @@ Day Six:
 	- Got doors to actually work
 	- Placed doors
 	- Placed the walls again for the 5,000,000th time
-
+Day Seven:
+	-Forgot to record...again
+	-Made the shaders to handle glitch effect
+	-Animated the character from scratch
+	-"decorated" the bathroom
 
