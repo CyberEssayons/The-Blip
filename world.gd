@@ -8,6 +8,7 @@ var State: GameStates = GameStates.Start
 var paused: bool = false
 var playerCanLock: bool = false
 var playerCanTurnOffTV: bool = false
+var voicePlayed: int = 0
 @onready var Objective: Label = $ObjectiveContainer/Objective
 @onready var PlayerHint: Label = $PlayerHintContainer/PlayerHintLabel
 @onready var slightPause: Timer = $Timer
@@ -89,9 +90,10 @@ func on_tv_static_finished():
 	if(State == GameStates.BuildUp1):
 		TVStaticSound.play()
 
-func On_mb_entrace_enetered(body: Node3D)->void:
-	if(State == GameStates.BuildUp1):
+func On_mb_entrace_enetered(body: Node3D):
+	if(State == GameStates.BuildUp2):
 		#Stop the music. Wait X seconds. Then change the objective
+		
 		State = GameStates.Bilp1
 		pass
 	pass
@@ -116,20 +118,32 @@ func on_Timer_finished():
 		TVStaticSound.play()
 		TVStaticVideo.loop = true
 		TVStaticVideo.play()
-	elif(State == GameStates.BuildUp2):
+	elif(State == GameStates.BuildUp2 and voicePlayed == 0):
 		Objective.text = "Objective: investigate that voice"
 		VoiceSound.play()
+		voicePlayed = voicePlayed + 1
+	elif(State == GameStates.BuildUp2 and voicePlayed > 0):
+		rotateVoice(voicePlayed)
+		voicePlayed = voicePlayed + 1
+		VoiceSound.play()
+		slightPause.start(4)
+	elif(State == GameStates.Bilp1):
+		BlipChar.global_position = BlipChar.origin
+		BlipChar.rotation_degrees = BlipChar.naturalRotation
+		pass	
 
 
 func _on_disembodied_voice_finished():
 	TenseMusic.play()
-	pass # Replace with function body.
+	slightPause.stop()
+	slightPause.start(5)
 
 
 func _on_bedroom_entrance_1_body_entered(body):
 	if(State == GameStates.Bilp1):
 		BlipChar.rotate_y(deg_to_rad(-90))
 		BlipChar.global_position = $BedroomEntrance1/Blip1Spawn1.global_position
+		slightPause.start(0.5)
 	pass # Replace with function body.
 
 
@@ -137,4 +151,29 @@ func _on_bedroom_entrance_2_body_entered(body):
 	if(State == GameStates.Bilp1):
 		BlipChar.rotate_y(deg_to_rad(180))
 		BlipChar.global_position = $BedroomEntrance2/Blip1Spawn2.global_position
+		slightPause.start(0.5)
 	pass # Replace with function body.
+
+
+func _on_mb_entrance_2_body_entered(body):
+	mb_entrance_shared_logic()
+	pass # Replace with function body.
+
+
+func _on_mb_entrance_1_body_entered(body):
+	mb_entrance_shared_logic()
+	pass # Replace with function body.
+
+func mb_entrance_shared_logic():
+	#do what both area's need
+	if(State == GameStates.BuildUp2):
+		TenseMusic.stop()
+		slightPause.stop()
+		State = GameStates.Bilp1
+		Objective.text = "Objective: go to bed"
+		
+func rotateVoice(counter: int):
+	if(counter % 2 != 0):
+		VoiceSound.stream = load("res://Sounds/BlipVA-02.wav")
+	else:
+		VoiceSound.stream = load("res://Sounds/BlipVA-01.wav")

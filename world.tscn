@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bumdj7e27hagu"]
+[gd_scene load_steps=34 format=3 uid="uid://bumdj7e27hagu"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_6fgvf"]
 [ext_resource type="PackedScene" uid="uid://d4frqd6ime8es" path="res://house_but_cooler.tscn" id="1_10dlk"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://b2omt1wvb0e4o" path="res://Sounds/white-noise-8117.mp3" id="10_px2lg"]
 [ext_resource type="PackedScene" uid="uid://cbyx6nw4jpqn2" path="res://Fridge.tscn" id="11_m3xt7"]
 [ext_resource type="PackedScene" uid="uid://obdbgyjifpnx" path="res://Stove.tscn" id="12_4dp2x"]
+[ext_resource type="AudioStream" uid="uid://eb4h8jtufwtc" path="res://Sounds/BlipVA-01.wav" id="13_2hgm5"]
 [ext_resource type="PackedScene" uid="uid://bgso0scuniipd" path="res://Door.tscn" id="15_c0a02"]
 [ext_resource type="PackedScene" uid="uid://bggtllpmbhtqb" path="res://Meshes/glb_LowPoly_Furniture/Bathroom_glb/Toilet Roll Holder.glb" id="16_sw6kl"]
 [ext_resource type="PackedScene" uid="uid://cuewojqr16yrj" path="res://toilet.tscn" id="17_ibu6j"]
@@ -185,6 +186,7 @@ bus = &"SFX"
 
 [node name="DisembodiedVoice" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.40028, 5.59133, -13.8832)
+stream = ExtResource("13_2hgm5")
 bus = &"SFX"
 
 [node name="MBEntrance1" type="Area3D" parent="."]
@@ -300,7 +302,9 @@ transform = Transform3D(-0.8, 0, 6.99382e-08, 0, 0.8, 0, -6.99382e-08, 0, -0.8, 
 [connection signal="finished" from="DoorLockSound" to="." method="_on_door_lock_sound_finished"]
 [connection signal="finished" from="TVStatic" to="." method="on_tv_static_finished"]
 [connection signal="finished" from="DisembodiedVoice" to="." method="_on_disembodied_voice_finished"]
+[connection signal="body_entered" from="MBEntrance1" to="." method="_on_mb_entrance_1_body_entered"]
 [connection signal="body_entered" from="MBEntrance1" to="." method="On_mb_entrance_entered"]
+[connection signal="body_entered" from="MBEntrance2" to="." method="_on_mb_entrance_2_body_entered"]
 [connection signal="body_entered" from="MBEntrance2" to="." method="On_mb_entrance_entered"]
 [connection signal="body_entered" from="BedroomEntrance1" to="." method="_on_bedroom_entrance_1_body_entered"]
 [connection signal="body_entered" from="BedroomEntrance2" to="." method="_on_bedroom_entrance_2_body_entered"]
