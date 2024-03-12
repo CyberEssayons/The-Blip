@@ -8,6 +8,7 @@ var State: GameStates = GameStates.Start
 var paused: bool = false
 var playerCanLock: bool = false
 var playerCanTurnOffTV: bool = false
+var playerSeenBlip1: bool = false
 var voicePlayed: int = 0
 @onready var Objective: Label = $ObjectiveContainer/Objective
 @onready var PlayerHint: Label = $PlayerHintContainer/PlayerHintLabel
@@ -21,6 +22,8 @@ var voicePlayed: int = 0
 @onready var TVStaticSound: AudioStreamPlayer3D = $TVStatic
 @onready var VoiceSound: AudioStreamPlayer3D = $DisembodiedVoice
 @onready var TenseMusic: AudioStreamPlayer = $TenseMusic
+@onready var ElectroStatic: AudioStreamPlayer = $ElectroStatic
+@onready var BlipIn: AudioStreamPlayer3D = $BlipChar/BlipInSound
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -90,14 +93,6 @@ func on_tv_static_finished():
 	if(State == GameStates.BuildUp1):
 		TVStaticSound.play()
 
-func On_mb_entrace_enetered(body: Node3D):
-	if(State == GameStates.BuildUp2):
-		#Stop the music. Wait X seconds. Then change the objective
-		
-		State = GameStates.Bilp1
-		pass
-	pass
-
 
 func on_can_reach_TV_entered(body: Node3D)->void:
 	if(State == GameStates.BuildUp1):
@@ -127,30 +122,42 @@ func on_Timer_finished():
 		voicePlayed = voicePlayed + 1
 		VoiceSound.play()
 		slightPause.start(4)
-	elif(State == GameStates.Bilp1):
+	elif(State == GameStates.Bilp1 and not playerSeenBlip1):
+		Objective.text = "Objective: go to bed"
+		
+	elif(State == GameStates.Bilp1 and playerSeenBlip1):
 		BlipChar.global_position = BlipChar.origin
 		BlipChar.rotation_degrees = BlipChar.naturalRotation
+		BlipIn.stop()
+		slightPause.start(5)
+		Objective.text = "Objective: ..."
+		State = GameStates.BuildUp3
 		pass	
 
 
 func _on_disembodied_voice_finished():
-	TenseMusic.play()
+	if(not TenseMusic.playing):
+		TenseMusic.play()
 	slightPause.stop()
 	slightPause.start(5)
 
 
 func _on_bedroom_entrance_1_body_entered(body):
 	if(State == GameStates.Bilp1):
+		BlipIn.play()
 		BlipChar.rotate_y(deg_to_rad(-90))
 		BlipChar.global_position = $BedroomEntrance1/Blip1Spawn1.global_position
+		playerSeenBlip1 = true
 		slightPause.start(0.5)
 	pass # Replace with function body.
 
 
 func _on_bedroom_entrance_2_body_entered(body):
 	if(State == GameStates.Bilp1):
+		BlipIn.play()
 		BlipChar.rotate_y(deg_to_rad(180))
 		BlipChar.global_position = $BedroomEntrance2/Blip1Spawn2.global_position
+		playerSeenBlip1 = true
 		slightPause.start(0.5)
 	pass # Replace with function body.
 
@@ -170,7 +177,7 @@ func mb_entrance_shared_logic():
 		TenseMusic.stop()
 		slightPause.stop()
 		State = GameStates.Bilp1
-		Objective.text = "Objective: go to bed"
+		slightPause.start(4.0)
 		
 func rotateVoice(counter: int):
 	if(counter % 2 != 0):
