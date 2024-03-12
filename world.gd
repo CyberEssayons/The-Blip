@@ -70,16 +70,15 @@ func on_player_canReach_FrontDoor(body):
 
 	if(State == GameStates.Bilp2):
 		if(body is Player):
+			$FrontDoor.allowOpen = true
 			playerCanLock = true
 			PlayerHint.text = "Press 'E' or LMB to unlock and open door"
-	pass # Replace with function body.
 
 
 func on_player_cantReach_FrontDoor(body):
 	if(body is Player):
 		playerCanLock = false
 		PlayerHint.text = ""
-	pass # Replace with function body.
 
 
 func _on_door_lock_sound_finished():
@@ -87,7 +86,6 @@ func _on_door_lock_sound_finished():
 	slightPause.start(1)
 	Objective.text = "Objective: Go to bed"
 	
-	pass # Replace with function body.
 
 func on_tv_static_finished():
 	if(State == GameStates.BuildUp1):
@@ -99,7 +97,6 @@ func on_can_reach_TV_entered(body: Node3D)->void:
 		if(body is Player):
 			playerCanTurnOffTV = true
 			PlayerHint.text = "Press 'E' or LMB to turn off TV"
-	pass # Replace with function body.
 
 func on_can_reach_tv_exited(body: Node3D)->void:
 	if(body is Player):
@@ -132,7 +129,14 @@ func on_Timer_finished():
 		slightPause.start(5)
 		Objective.text = "Objective: ..."
 		State = GameStates.BuildUp3
-		pass	
+	elif(State == GameStates.BuildUp3):
+		ElectroStatic.play()
+		Objective.text = "Objective: hide in bathroom"
+		slightPause.start(15.0)
+		State = GameStates.Bilp2
+	elif(State == GameStates.Bilp2):
+		Objective.text = "Objective: GET OUT"
+		ElectroStatic.stop()
 
 
 func _on_disembodied_voice_finished():
@@ -148,8 +152,7 @@ func _on_bedroom_entrance_1_body_entered(body):
 		BlipChar.rotate_y(deg_to_rad(-90))
 		BlipChar.global_position = $BedroomEntrance1/Blip1Spawn1.global_position
 		playerSeenBlip1 = true
-		slightPause.start(0.5)
-	pass # Replace with function body.
+		slightPause.start(0.25)
 
 
 func _on_bedroom_entrance_2_body_entered(body):
@@ -158,18 +161,16 @@ func _on_bedroom_entrance_2_body_entered(body):
 		BlipChar.rotate_y(deg_to_rad(180))
 		BlipChar.global_position = $BedroomEntrance2/Blip1Spawn2.global_position
 		playerSeenBlip1 = true
-		slightPause.start(0.5)
-	pass # Replace with function body.
+		slightPause.start(0.25)
+	
 
 
 func _on_mb_entrance_2_body_entered(body):
 	mb_entrance_shared_logic()
-	pass # Replace with function body.
 
 
 func _on_mb_entrance_1_body_entered(body):
 	mb_entrance_shared_logic()
-	pass # Replace with function body.
 
 func mb_entrance_shared_logic():
 	#do what both area's need
