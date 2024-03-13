@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dtvyatvu3d1ym"
+path="res://.godot/imported/BookCaseLarge.obj-0481b2c4349111e1975199ef8a8f2f7c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BookCaseLarge.obj-0481b2c4349111e1975199ef8a8f2f7c.mesh"]
+
+source_file="res://Meshes/OBJ_LowPoly_Furniture/BookCaseLarge.obj"
+dest_files=["res://.godot/imported/BookCaseLarge.obj-0481b2c4349111e1975199ef8a8f2f7c.mesh", "res://.godot/imported/BookCaseLarge.obj-0481b2c4349111e1975199ef8a8f2f7c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

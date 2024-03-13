@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cjpyrw6lwq608"
+path="res://.godot/imported/Lamp2.obj-817ff34cb4bceb5eca79b11bc60ff5a0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Lamp2.obj-817ff34cb4bceb5eca79b11bc60ff5a0.mesh"]
+
+source_file="res://Meshes/OBJ_LowPoly_Furniture/Lamp2.obj"
+dest_files=["res://.godot/imported/Lamp2.obj-817ff34cb4bceb5eca79b11bc60ff5a0.mesh", "res://.godot/imported/Lamp2.obj-817ff34cb4bceb5eca79b11bc60ff5a0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

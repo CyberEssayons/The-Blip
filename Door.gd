@@ -22,21 +22,25 @@ func openDoorIn(door_name: StringName):
 	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Open_in")
+		toggle = true
 		
 func openDoorOut(door_name: StringName):
 	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Open_out")
+		toggle = true
 		
 func closeDoorIn(door_name: StringName):
 	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Close_in")
+		toggle = false
 		
 func closeDoorOut(door_name: StringName):
 	if(door_name == DoorName and canInteract and allowOpen):
 		canInteract = false
 		$AnimationPlayer.play("Close_out")
+		toggle = false
 
 
 func _on_can_open_body_entered(body):
@@ -57,5 +61,6 @@ func _on_can_open_body_exited(body):
 	if(body is Player):
 		canInteract = false
 		playerInArea = false
-		emit_signal("playerLeftInteractRange", DoorName)
+		if(toggle):
+			pass
 	pass # Replace with function body.

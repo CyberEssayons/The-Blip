@@ -9,14 +9,19 @@ var paused: bool = false
 var playerCanLock: bool = false
 var playerCanTurnOffTV: bool = false
 var playerSeenBlip1: bool = false
+var PlayerFinished: bool = false
+var FinalJumpScare: bool = false
 var voicePlayed: int = 0
+@onready var ThePlayer: Player = $Player
 @onready var Objective: Label = $ObjectiveContainer/Objective
 @onready var PlayerHint: Label = $PlayerHintContainer/PlayerHintLabel
+@onready var DialogLabel: Label = $VBoxContainer/Dialog
 @onready var slightPause: Timer = $Timer
 @onready var BlipChar = $BlipChar
 
 @onready var TVStaticVideo: VideoStreamPlayer = $SubViewport/VideoStreamPlayer
 
+@onready var PauseMenu = $Pause_menu
 #Sounds
 @onready var LockDoorSound: AudioStreamPlayer3D = $DoorLockSound 
 @onready var TVStaticSound: AudioStreamPlayer3D = $TVStatic
@@ -41,8 +46,12 @@ func _input(event):
 		paused = not paused
 		if(paused):
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			PauseMenu.show()
+			PauseMenu.BeginMenu()
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			PauseMenu.EndMenu()
+			PauseMenu.hide()
 			
 	if(event.is_action_pressed("interact")):
 		if(State == GameStates.Start and playerCanLock):
@@ -50,6 +59,7 @@ func _input(event):
 			LockDoorSound.play()
 			
 		elif(State == GameStates.Bilp2 and playerCanLock):
+			LockDoorSound.play()
 			pass
 			
 		if(State == GameStates.BuildUp1 and playerCanTurnOffTV):
@@ -82,9 +92,10 @@ func on_player_cantReach_FrontDoor(body):
 
 
 func _on_door_lock_sound_finished():
-	State = GameStates.BuildUp1
-	slightPause.start(1)
-	Objective.text = "Objective: Go to bed"
+	if(State == GameStates.Start):
+		State = GameStates.BuildUp1
+		slightPause.start(1)
+		Objective.text = "Objective: Go to bed"
 	
 
 func on_tv_static_finished():
@@ -134,9 +145,12 @@ func on_Timer_finished():
 		Objective.text = "Objective: hide in bathroom"
 		slightPause.start(15.0)
 		State = GameStates.Bilp2
-	elif(State == GameStates.Bilp2):
+	elif(State == GameStates.Bilp2 and not FinalJumpScare):
 		Objective.text = "Objective: GET OUT"
 		ElectroStatic.stop()
+	elif(State == GameStates.Bilp2 and FinalJumpScare):
+		get_tree().change_scene_to_file("res://credits.tscn")
+		pass
 
 
 func _on_disembodied_voice_finished():
@@ -185,3 +199,26 @@ func rotateVoice(counter: int):
 		VoiceSound.stream = load("res://Sounds/BlipVA-02.wav")
 	else:
 		VoiceSound.stream = load("res://Sounds/BlipVA-01.wav")
+
+
+func _on_blip_2_detect_body_entered(body):
+	if(State == GameStates.Bilp2):
+		BlipChar.global_position = $Blip2Detect/Blip2Spawn.global_position
+		BlipChar.rotate_y(deg_to_rad(180))
+		BlipChar.playAnim()
+		BlipIn.play()
+		FinalJumpScare = true
+
+
+func _on_blip_char_move_away():
+	BlipChar.queue_free()
+	BlipIn.stop()
+	FinalJumpScare = true
+	DialogLabel.show()
+	slightPause.start(1.5)
+
+
+func _on_pause_menu_continue_game():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	PauseMenu.hide()
+	paused = false

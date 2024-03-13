@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://f152oldhapt0"
+path="res://.godot/imported/Bed.obj-24e17bbe0a7a0c4d340b3a7571e9aa70.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bed.obj-24e17bbe0a7a0c4d340b3a7571e9aa70.mesh"]
+
+source_file="res://Meshes/OBJ_LowPoly_Furniture/Bed.obj"
+dest_files=["res://.godot/imported/Bed.obj-24e17bbe0a7a0c4d340b3a7571e9aa70.mesh", "res://.godot/imported/Bed.obj-24e17bbe0a7a0c4d340b3a7571e9aa70.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

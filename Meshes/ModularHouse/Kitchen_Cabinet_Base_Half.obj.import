@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dsbiwjbtvax4t"
+path="res://.godot/imported/Kitchen_Cabinet_Base_Half.obj-4c8d50ba8dea3e263824e9dee8ca33ef.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Kitchen_Cabinet_Base_Half.obj-4c8d50ba8dea3e263824e9dee8ca33ef.mesh"]
+
+source_file="res://Meshes/ModularHouse/Kitchen_Cabinet_Base_Half.obj"
+dest_files=["res://.godot/imported/Kitchen_Cabinet_Base_Half.obj-4c8d50ba8dea3e263824e9dee8ca33ef.mesh", "res://.godot/imported/Kitchen_Cabinet_Base_Half.obj-4c8d50ba8dea3e263824e9dee8ca33ef.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

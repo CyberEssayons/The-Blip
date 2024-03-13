@@ -53,7 +53,6 @@ func _input(event):
 		
 	if(event.is_action_pressed("interact")):
 		if(canReachDoor):
-			print(currentDoor.toggle)
 			if(currentDoor.toggle):
 				currentDoor.closeDoorIn(currentDoor.DoorName)
 			else:

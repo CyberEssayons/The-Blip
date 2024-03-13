@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cybqus44swijq"
+path="res://.godot/imported/BedKing.obj-bbc9876b355fdcf9423798d2c80073c1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BedKing.obj-bbc9876b355fdcf9423798d2c80073c1.mesh"]
+
+source_file="res://Meshes/OBJ_LowPoly_Furniture/BedKing.obj"
+dest_files=["res://.godot/imported/BedKing.obj-bbc9876b355fdcf9423798d2c80073c1.mesh", "res://.godot/imported/BedKing.obj-bbc9876b355fdcf9423798d2c80073c1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

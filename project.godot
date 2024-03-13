@@ -11,9 +11,15 @@ config_version=5
 [application]
 
 config/name="The Blip"
-run/main_scene="res://world.tscn"
+run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.0784314, 0.164706, 0.0901961, 1)
+boot_splash/show_image=false
+config/icon="res://blipIcon.png"
+
+[display]
+
+window/size/mode=3
 
 [editor_plugins]
 
